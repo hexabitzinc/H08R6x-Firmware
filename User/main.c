@@ -41,11 +41,12 @@
 
 
 /* Private variables ---------------------------------------------------------*/
-
+float sensor = 0.0f;
+static uint8_t mode;
 
 /* Private function prototypes -----------------------------------------------*/
 
-
+bool DetectedHorizontalSweep(float distance);
 
 /* Main functions ------------------------------------------------------------*/
 
@@ -81,23 +82,150 @@ int main(void)
 
   }
 
-
 }
-
 /*-----------------------------------------------------------*/
 
 /* User Task */
 void UserTask(void * argument)
 {
-
+#if _module == 1
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
 	
+#endif	
+#if _module == 2
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
+	
+#endif	
+#if _module == 3
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
+	
+#endif	
+#if _module == 4
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
+	
+#endif	
+#if _module == 6
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
+	
+#endif	
+#if _module == 7
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(200, portMAX_DELAY, &sensor);
+	
+#endif
+#if _module == 8
+	// Set units to cm
+	SetRangeUnit(UNIT_MEASUREMENT_MM);
+	// Stream to memory
+	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
+	
+#endif
+
   /* Infinite loop */
   for(;;)
   {
-
+        #if _module == 1
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=1;
+								//IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+							  Delay_ms(50);
+						}
+				#endif
+				       
+				#if _module == 2
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=2;
+								//IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+							  Delay_ms(50);
+						}
+				#endif
+				
+				#if _module == 3
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=3;
+								//IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+								Delay_ms(50);
+						}
+				#endif
+				
+				#if _module == 4
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=4;
+							//	IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+								Delay_ms(50);
+						}
+				#endif
+				
+				#if _module == 6
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=5;
+								//IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+								Delay_ms(50);
+						}
+				#endif
+				
+				#if _module == 7
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=6;
+								//IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+								Delay_ms(50);
+						}
+				#endif
+				
+				#if _module == 8
+						if (DetectedHorizontalSweep(sensor)) 
+						{					
+								mode=7;
+								//IND_ON();
+								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
+								Delay_ms(50);
+						}
+				#endif
+				
 	}
 }
 
 /*-----------------------------------------------------------*/
-
+bool DetectedHorizontalSweep(float distance)
+{
+		static float state;
+	if (distance < 40.0f && distance > 10.f && state != 1)
+	{
+		state = 1;	// Detected an object
+		return true;
+	}
+	else if (distance >= h08r6MaxRange && state == 1) {
+		state = 2;	// The object cleared
+	} 
+	return false;	
+}
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/
