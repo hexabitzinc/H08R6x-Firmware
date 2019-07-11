@@ -30,7 +30,7 @@
 #define _mod8	8<<3
 
 // Topology
-static uint16_t array[_N][7] = {
+static uint16_t array[_N][8] = {
 { _H08R6, _mod2|P4, 0, 0, 0, 0, 0},			// Module 1
 { _H08R6, _mod3|P4, 0, 0, _mod1|P1, 0, 0},			// Module 2
 { _H08R6, _mod4|P4, 0, 0, _mod2|P1, 0, _mod8|P5},			// Module 3

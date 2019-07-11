@@ -15,12 +15,10 @@
 
 
 /* Include a predefined topology here */
-//#include "topology_1.h"
-
+#include "topology_1.h"
 
 
 /* Emulated EEPROM Virtual addresses for user parameters */
-
 
 
 #endif /* PROJECT_H */
