@@ -276,4 +276,59 @@ bool DetectedHorizontalSweep(float distance)
 	} 
 	return false;	
 }
+
+void buttonClickedCallback(uint8_t port)
+{	
+		// Increase octave
+		#if _module == 1	
+        Octave=Octave+1;
+        if (Octave >= 9)
+	      Octave=9;
+	 
+				WriteRemote(2, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(3, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(4, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(5, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(6, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(7, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+		#endif
+				
+	  // decrease octave
+		#if _module == 7																														
+        Octave--;
+	      if (Octave <= 0)
+				Octave=0;
+
+				WriteRemote(6, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(5, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(4, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(3, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(2, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+				
+				WriteRemote(1, (uint32_t) &Octave, 1, FMT_UINT8, 0);			// Broadcast to other modules	
+				Delay_ms(50);
+		#endif
+		
+		IND_blink(200);
+}
 /************************ (C) COPYRIGHT HEXABITZ *****END OF FILE****/
