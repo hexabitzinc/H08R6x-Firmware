@@ -121,98 +121,141 @@ void UserTask(void * argument)
 	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
 	
 #endif	
-#if _module == 6
+#if _module == 5
 	// Set units to cm
 	SetRangeUnit(UNIT_MEASUREMENT_MM);
 	// Stream to memory
 	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
 	
 #endif	
-#if _module == 7
+#if _module == 6
 	// Set units to cm
 	SetRangeUnit(UNIT_MEASUREMENT_MM);
 	// Stream to memory
 	Stream_ToF_Memory(200, portMAX_DELAY, &sensor);
 	
 #endif
-#if _module == 8
-	// Set units to cm
+#if _module == 7
+	// Set units to mm
 	SetRangeUnit(UNIT_MEASUREMENT_MM);
 	// Stream to memory
 	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
 	
+	AddPortButton(MOMENTARY_NO, P6);
+	SetButtonEvents(P6,1,0,0,0,0,0,0,0,0);
 #endif
 
   /* Infinite loop */
   for(;;)
   {
-        #if _module == 1
+        #if _module == 1 //note C
 						if (DetectedHorizontalSweep(sensor)) 
 						{					
-								mode=1;
-								//IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-							  Delay_ms(50);
+									//freq
+									messageParams[0] = 0;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				       
-				#if _module == 2
+				#if _module == 2 //note D
 						if (DetectedHorizontalSweep(sensor)) 
 						{					
-								mode=2;
-								//IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-							  Delay_ms(50);
+									//freq
+									messageParams[0] = 2;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				
-				#if _module == 3
+				#if _module == 3//note E
 						if (DetectedHorizontalSweep(sensor)) 
 						{					
-								mode=3;
-								//IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-								Delay_ms(50);
+										//freq
+									messageParams[0] = 4;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				
-				#if _module == 4
+				#if _module == 4 //note F
 						if (DetectedHorizontalSweep(sensor)) 
 						{					
-								mode=4;
-							//	IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-								Delay_ms(50);
+									//freq
+									messageParams[0] = 5;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				
-				#if _module == 6
+				#if _module == 5 // note G
 						if (DetectedHorizontalSweep(sensor)) 
 						{					
-								mode=5;
-								//IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-								Delay_ms(50);
+									//freq
+									messageParams[0] = 7;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				
-				#if _module == 7
+				#if _module == 6 // Tone A
 						if (DetectedHorizontalSweep(sensor)) 
 						{					
-								mode=6;
-								//IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-								Delay_ms(50);
+									//freq
+									messageParams[0] = 9;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				
-				#if _module == 8
+				#if _module == 7 // note B
 						if (DetectedHorizontalSweep(sensor)) 
-						{					
-								mode=7;
-								//IND_ON();
-								WriteRemote(5, (uint32_t) &mode, 1, FMT_UINT8, 0);
-								Delay_ms(50);
+						{				
+									//freq
+									messageParams[0] = 11;
+									messageParams[1] = Octave;
+
+									// durationInSeconds * 16
+
+									messageParams[2] = 4;
+
+									SendMessageToModule(8, 802,3);
+									IND_blink(100);
 						}
 				#endif
 				
