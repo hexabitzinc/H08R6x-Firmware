@@ -88,12 +88,17 @@ int main(void)
 /* User Task */
 void UserTask(void * argument)
 {
+	//BOS.trace = TRACE_NONE;
+	AddBOSvar(FMT_UINT8, (uint32_t) &Octave);
+
 #if _module == 1
-	// Set units to cm
+	// Set units to mm
 	SetRangeUnit(UNIT_MEASUREMENT_MM);
 	// Stream to memory
 	Stream_ToF_Memory(50, portMAX_DELAY, &sensor);
 	
+	AddPortButton(MOMENTARY_NO, P5);
+	SetButtonEvents(P5, 1, 0, 0, 0, 0, 0, 0, 0, 0);
 #endif	
 #if _module == 2
 	// Set units to cm
