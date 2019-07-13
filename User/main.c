@@ -42,7 +42,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 float sensor = 0.0f;
-static uint8_t mode;
+volatile uint8_t Octave=4;
 
 /* Private function prototypes -----------------------------------------------*/
 
